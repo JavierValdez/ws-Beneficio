@@ -41,6 +41,7 @@ public class usuario {
         this.fecha_modificacion = fecha_modificacion;
     }
 
+
     @Column (name="fecha_modificacion", length=30)
     public Date getFecha_modificacion() {
         return fecha_modificacion;
@@ -130,7 +131,7 @@ public class usuario {
         this.telefono = telefono;
     }
 
-    @Column(name = "direccion", length=50)
+    @Column(name = "direccion", length=200)
     public String getDireccion() {
         return direccion;
     }

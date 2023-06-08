@@ -9,4 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface repositoriesUsuario extends CrudRepository<usuario,Integer>  {
     @Override
     public List<usuario> findAll();
+
+
+
 }

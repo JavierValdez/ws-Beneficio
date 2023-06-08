@@ -75,5 +75,7 @@ public class usuarioServices {
         byte[] textoDesencriptado = cifrador.doFinal(Base64.getDecoder().decode(textoEncriptado));
         return new String(textoDesencriptado, "UTF-8");
     }
+
+
   
 }

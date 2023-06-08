@@ -21,11 +21,13 @@ public class Transportista {
     private Integer estado;
     private Date fecha_inscripcion;
     private Date fecha_modificacion;
+    //String imagen
+    private String imagen;
 
     public Transportista() {
     }
 
-    public Transportista(String numero_licencia, String nombres, String apellidos, String tipo_licencia, Integer estado, Date fecha_inscripcion, Date fecha_modificacion) {
+    public Transportista(String numero_licencia, String nombres, String apellidos, String tipo_licencia, Integer estado, Date fecha_inscripcion, Date fecha_modificacion, String imagen) {
         this.numero_licencia = numero_licencia;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -33,6 +35,7 @@ public class Transportista {
         this.estado = estado;
         this.fecha_inscripcion = fecha_inscripcion;
         this.fecha_modificacion = fecha_modificacion;
+        this.imagen = imagen;
     }
 
     @Id
@@ -69,6 +72,16 @@ public class Transportista {
     @Column (name="fecha_modificacion")
     public Date getFecha_modificacion() {
         return fecha_modificacion;
+    }
+
+    //Longitud maxima en java
+    @Column (name="imagen", length=100000)
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public void setNumero_licencia(String numero_licencia) {
