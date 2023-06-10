@@ -1,5 +1,6 @@
 package com.usuarios.usuarios.controllers;
 
+import com.usuarios.usuarios.Dto.LoginDTO;
 import com.usuarios.usuarios.Dto.TransportistaDto;
 import com.usuarios.usuarios.models.Transportista;
 import com.usuarios.usuarios.services.TransportistaServices;
@@ -20,8 +21,8 @@ public class TransportistaController {
     Logger logger = LoggerFactory.getLogger(TransportistaController.class);
     @Autowired
     TransportistaServices TransportistaServices;
-    
-    @CrossOrigin(origins="http://localhost:4200")
+
+    @CrossOrigin(origins = {"http://localhost:4200", "https://cafetalito-3af53.web.app/"})
     @GetMapping(value="Transportista/EncuentraTransportista")
     public List<Transportista> getAllTransportista (){
         return TransportistaServices.getAllTransportista();
@@ -31,7 +32,7 @@ public class TransportistaController {
 
 
     @ResponseBody
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = {"http://localhost:4200", "https://cafetalito-3af53.web.app/"})
     @PostMapping(value = "Transportista/InscribirTransportista", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> InscribirTransportista(
             @RequestBody TransportistaDto dto,
@@ -83,7 +84,7 @@ public class TransportistaController {
 
 
     //metodo para crear un usuario
-    @CrossOrigin(origins="http://localhost:4200")
+    @CrossOrigin(origins = {"http://localhost:4200", "https://cafetalito-3af53.web.app/"})
     @PostMapping(value="Transportista/consultaTransportista")
     public String consultaTransportista(
             @RequestBody TransportistaDto dto,
@@ -96,7 +97,7 @@ public class TransportistaController {
     }
     
     //metodo para crear un usuario
-    @CrossOrigin(origins="http://localhost:4200")
+    @CrossOrigin(origins = {"http://localhost:4200", "https://cafetalito-3af53.web.app/"})
     @PostMapping(value="Transportista/eliminarTransportista")
     public String eliminarTransportista(
             @RequestBody TransportistaDto dto,
@@ -104,6 +105,15 @@ public class TransportistaController {
             @RequestParam(required=false)String contrasena
     )throws Exception{
         return TransportistaServices.eliminarTransportista(dto, nit, contrasena);
+    }
+
+    //Metodo login
+    @CrossOrigin(origins = {"http://localhost:4200", "https://cafetalito-3af53.web.app/"})
+    @PostMapping(value="Transportista/login")
+    public String login(
+            @RequestBody LoginDTO loginRequest
+    )throws Exception{
+        return TransportistaServices.authenticateTransportista(loginRequest);
     }
     
 }

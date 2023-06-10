@@ -18,6 +18,7 @@ public class usuarioDto {
     private Integer edad;
     private String telefono;
     private String direccion;
+    private String rol;
    
     
 }

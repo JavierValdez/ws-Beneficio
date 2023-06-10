@@ -23,11 +23,13 @@ public class usuario {
     private  String estado;
     private Date fecha_inscripcion;
     private Date fecha_modificacion;
+    private String rol;
+
 
     public usuario() {
     }
 
-    public usuario(String nit, String nombre, String apellido, String contrasena, String correo, Integer edad, String telefono, String direccion, String estado, Date fecha_inscripcion, Date fecha_modificacion) {
+    public usuario(String nit, String nombre, String apellido, String contrasena, String correo, Integer edad, String telefono, String direccion, String estado, Date fecha_inscripcion, Date fecha_modificacion, String rol) {
         this.nit = nit;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -39,6 +41,7 @@ public class usuario {
         this.estado = estado;
         this.fecha_inscripcion = fecha_inscripcion;
         this.fecha_modificacion = fecha_modificacion;
+        this.rol = rol;
     }
 
 
@@ -139,6 +142,17 @@ public class usuario {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
+
+
+
+    @Column(name = "rol", length=200)
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
     
 }

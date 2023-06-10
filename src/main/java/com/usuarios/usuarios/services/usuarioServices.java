@@ -1,6 +1,7 @@
 
 package com.usuarios.usuarios.services;
 
+import com.usuarios.usuarios.Dto.LoginDTO;
 import com.usuarios.usuarios.Dto.usuarioDto;
 import com.usuarios.usuarios.models.usuario;
 import com.usuarios.usuarios.repositories.repositoriesUsuario;
@@ -15,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service
 @Transactional
 public class usuarioServices {
@@ -45,6 +45,7 @@ public class usuarioServices {
         usuario.setDireccion(dto.getDireccion());
         usuario.setEstado("1020");
         usuario.setFecha_inscripcion(fecha);
+        usuario.setRol(dto.getRol());
         System.out.println("NOMBRE ENCRIPTADO....>>>>>>>>><<<<<<<: "+passEncriptada);
         System.out.println("NOMBRE Desencriptado....>>>>>>>>><<<<<<<: "+pasDesencriptada);
         return repositoriesUsuario.save(usuario);
@@ -75,7 +76,45 @@ public class usuarioServices {
         byte[] textoDesencriptado = cifrador.doFinal(Base64.getDecoder().decode(textoEncriptado));
         return new String(textoDesencriptado, "UTF-8");
     }
+    @Transactional
+    public String authenticateUser(LoginDTO loginDto) throws Exception {
+            String username = loginDto.getUser();
+            String password = loginDto.getContrasena();
+
+            //validacion de correo y contraseña en repositoriesUsuario.findAll()
+            //si es correcto retorna el token
+            //si es incorrecto retorna un mensaje de error
+        password = encriptar(password);
+        System.out.println("correo: "+username);
+        System.out.println("contraseña: "+password);
+            List<usuario> usuarios = repositoriesUsuario.findAll();
+            for (usuario usuario : usuarios) {
+                if(usuario.getNit().equals(username) && usuario.getContrasena().equals(password)){
+                    //Devuelve todos los datos menos la clave
+
+                    String json = "{";
+                    json += "\"nit\": \"" + usuario.getNit() + "\",";
+                    json += "\"nombre\": \"" + usuario.getNombre() + "\",";
+                    json += "\"apellido\": \"" + usuario.getApellido() + "\",";
+                    json += "\"correo\": \"" + usuario.getCorreo() + "\",";
+                    json += "\"edad\": " + usuario.getEdad() + ",";
+                    json += "\"telefono\": \"" + usuario.getTelefono() + "\",";
+                    json += "\"direccion\": \"" + usuario.getDireccion() + "\",";
+                    json += "\"estado\": \"" + usuario.getEstado() + "\",";
+                    json += "\"rol\": \"" + usuario.getRol() + "\",";
+                    json += "\"fecha_inscripcion\": \"" + usuario.getFecha_inscripcion() + "\"";
+                    json += "}";
+                    return json;
 
 
-  
+                }
+            }
+            return "{\"error\": \"Usuario o contraseña incorrectos\"}";
+
+            // Lógica de autenticación
+        }
+
+
+
+
 }

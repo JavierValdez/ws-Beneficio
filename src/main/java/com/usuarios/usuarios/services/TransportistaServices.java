@@ -23,10 +23,13 @@
 
 package com.usuarios.usuarios.services;
 
+import com.usuarios.usuarios.Dto.LoginDTO;
 import com.usuarios.usuarios.Dto.TransportistaDto;
 import com.usuarios.usuarios.models.Transportista;
 import java.util.List;
 import javax.transaction.Transactional;
+
+import com.usuarios.usuarios.models.usuario;
 import com.usuarios.usuarios.repositories.TransportistaRepositories;
 import java.util.Base64;
 import java.util.Date;
@@ -36,6 +39,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
 @Service
 @Transactional
 public class TransportistaServices {
@@ -83,6 +88,7 @@ public class TransportistaServices {
         Transportista.setFecha_inscripcion(fecha);
         Transportista.setEstado(1020);
         Transportista.setImagen(dto.getImagen());
+        Transportista.setContrasena(dto.getContrasena());
 
 
         logger.info("Mensaje de información");
@@ -218,4 +224,44 @@ public class TransportistaServices {
         byte[] textoDesencriptado = cifrador.doFinal(Base64.getDecoder().decode(textoEncriptado));
         return new String(textoDesencriptado, "UTF-8");
     }
+
+    @Transactional
+    public String authenticateTransportista(LoginDTO loginDto) throws Exception {
+        String username = loginDto.getUser();
+        String password = loginDto.getContrasena();
+
+        //validacion de correo y contraseña en repositoriesUsuario.findAll()
+        //si es correcto retorna el token
+        //si es incorrecto retorna un mensaje de error
+        password = encriptar(password);
+        System.out.println("correo: "+username);
+        System.out.println("contraseña: "+password);
+        List<Transportista> Transportista = TransportistaRepositories.findAll();
+        for (Transportista transportista : Transportista) {
+            if(transportista.getContrasena().equals(username) && transportista.getContrasena().equals(password)){
+                //Devuelve todos los datos menos la clave
+
+                String json = "{";
+                json += "\"nombres\": \"" + transportista.getNombres() + "\",";
+                json += "\"apellidos\": \"" + transportista.getApellidos() + "\",";
+                json += "\"imagen\": \"" + transportista.getImagen() + "\",";
+                json += "\"tipo_licencia\": " + transportista.getTipo_licencia() + ",";
+                json += "\"numero_licencia\": \"" + transportista.getNumero_licencia() + "\",";
+                json += "\"estado\": \"" + transportista.getEstado() + "\",";
+                json += "\"fecha_inscripcion\": \"" + transportista.getFecha_inscripcion() + "\",";
+                json += "\"fecha_modificacion\": \"" + transportista.getFecha_modificacion() + "\",";
+                json += "}";
+                return json;
+
+
+            }
+        }
+        return "{\"error\": \"Usuario o contraseña incorrectos\"}";
+
+        // Lógica de autenticación
+    }
+
+
+
+
 }
