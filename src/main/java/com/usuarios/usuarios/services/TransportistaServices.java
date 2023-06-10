@@ -88,7 +88,7 @@ public class TransportistaServices {
         Transportista.setFecha_inscripcion(fecha);
         Transportista.setEstado(1020);
         Transportista.setImagen(dto.getImagen());
-        Transportista.setContrasena(dto.getContrasena());
+        Transportista.setContrasena(this.encriptar(dto.getContrasena()));
 
 
         logger.info("Mensaje de información");
@@ -238,18 +238,18 @@ public class TransportistaServices {
         System.out.println("contraseña: "+password);
         List<Transportista> Transportista = TransportistaRepositories.findAll();
         for (Transportista transportista : Transportista) {
-            if(transportista.getContrasena().equals(username) && transportista.getContrasena().equals(password)){
+            if(transportista.getNumero_licencia().equals(username) && transportista.getContrasena().equals(password)){
                 //Devuelve todos los datos menos la clave
 
                 String json = "{";
                 json += "\"nombres\": \"" + transportista.getNombres() + "\",";
                 json += "\"apellidos\": \"" + transportista.getApellidos() + "\",";
                 json += "\"imagen\": \"" + transportista.getImagen() + "\",";
-                json += "\"tipo_licencia\": " + transportista.getTipo_licencia() + ",";
+                json += "\"tipo_licencia\": \" " + transportista.getTipo_licencia() + "\",";
                 json += "\"numero_licencia\": \"" + transportista.getNumero_licencia() + "\",";
                 json += "\"estado\": \"" + transportista.getEstado() + "\",";
                 json += "\"fecha_inscripcion\": \"" + transportista.getFecha_inscripcion() + "\",";
-                json += "\"fecha_modificacion\": \"" + transportista.getFecha_modificacion() + "\",";
+                json += "\"fecha_modificacion\": \"" + transportista.getFecha_modificacion() + "\"";
                 json += "}";
                 return json;
 
