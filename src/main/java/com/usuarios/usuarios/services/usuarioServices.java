@@ -5,17 +5,15 @@ import com.usuarios.usuarios.Dto.LoginDTO;
 import com.usuarios.usuarios.Dto.usuarioDto;
 import com.usuarios.usuarios.models.usuario;
 import com.usuarios.usuarios.repositories.repositoriesUsuario;
-import java.util.Base64;
-import java.util.List;
-import java.util.Base64;
-import java.util.Date;
-import java.util.logging.Logger;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import org.slf4j.LoggerFactory;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import javax.transaction.Transactional;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
 @Service
 @Transactional
 public class usuarioServices {

@@ -4,11 +4,11 @@ package com.usuarios.usuarios.services;
 import com.usuarios.usuarios.Dto.pesajePesoCabalDto;
 import com.usuarios.usuarios.models.pesajePesoCabal;
 import com.usuarios.usuarios.repositories.pesajePesoCabalRepositories;
-import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.usuarios.usuarios.repositories.TransportistaRepositories;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional

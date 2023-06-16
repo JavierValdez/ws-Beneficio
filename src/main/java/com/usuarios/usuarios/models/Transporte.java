@@ -1,11 +1,11 @@
 
 package com.usuarios.usuarios.models;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name="Transporte", schema="public")
