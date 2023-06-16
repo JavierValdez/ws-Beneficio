@@ -26,18 +26,20 @@ package com.usuarios.usuarios.services;
 import com.usuarios.usuarios.Dto.LoginDTO;
 import com.usuarios.usuarios.Dto.TransportistaDto;
 import com.usuarios.usuarios.models.Transportista;
-import com.usuarios.usuarios.repositories.TransportistaRepositories;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
+import java.util.List;
 import javax.transaction.Transactional;
+
+import com.usuarios.usuarios.models.usuario;
+import com.usuarios.usuarios.repositories.TransportistaRepositories;
 import java.util.Base64;
 import java.util.Date;
-import java.util.List;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 @Service
 @Transactional

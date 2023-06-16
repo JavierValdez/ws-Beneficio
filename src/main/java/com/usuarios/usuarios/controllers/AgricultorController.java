@@ -8,10 +8,13 @@ package com.usuarios.usuarios.controllers;
 import com.usuarios.usuarios.Dto.AgricultorDto;
 import com.usuarios.usuarios.models.Agricultor;
 import com.usuarios.usuarios.services.AgricultorServices;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
