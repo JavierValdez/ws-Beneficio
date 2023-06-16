@@ -32,6 +32,7 @@ public class Agricultor {
     public Agricultor() {
     }
 
+
     public Agricultor(String nit, String nombre_comercial, String contrasena, String correo, Integer edad, String telefono, String direccion, String estado, Date fecha_inscripcion, Date fecha_modificacion) {
         this.nit = nit;
         this.nombre_comercial = nombre_comercial;
