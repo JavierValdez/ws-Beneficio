@@ -6,7 +6,9 @@
 package com.usuarios.usuarios.controllers;
 
 import com.usuarios.usuarios.Dto.CuentaDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Cuenta;
+import com.usuarios.usuarios.models.Transportista;
 import com.usuarios.usuarios.services.CuentaServices;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,19 +28,25 @@ public class CuentaController {
     
     @Autowired
     CuentaServices CuentaServices;
-    
-    
-    @CrossOrigin(origins="http://localhost:4200")
+
+
+    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
     @GetMapping(value="Cuenta/CuentasAlmacenadas")
     public List<Cuenta> getAllAgricultor (){
         return CuentaServices.getAllCuenta();
     }
     
     //metodo para crear un usuario
-    @CrossOrigin(origins="http://localhost:4200")
+    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
     @PostMapping(value="Cuenta/CrearCuenta")
-    public String crearAgricultor(@RequestBody CuentaDto dto) throws Exception{
+    public mensajeDto crearAgricultor(@RequestBody CuentaDto dto) {
         return CuentaServices.crearCuenta(dto);
+    }
+
+    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @GetMapping(value="Cuenta/ListadoCuentas")
+    public List<Cuenta> getTransporteS (@RequestParam String a) throws Exception{
+        return CuentaServices.getAllCuentas(a);
     }
     
 }

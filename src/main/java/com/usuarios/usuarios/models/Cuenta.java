@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -18,33 +20,37 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Cuenta", schema="public")
 public class Cuenta {
+
+ 
     
     private Integer id_cuenta;
     private String estado_cuenta;
     private Integer peso_total_de_envio;
     private Integer numero_parcialidades;
     private String matriculas_autorizadas;
-    private String nit_agricultor;
+    private String usuario_agricultor;
     private Integer numero_pesajes_registrados;
+    private Integer parcialidades_generadas;
     private Date fecha_creacion;
     private Date fecha_modificacion;
 
     public Cuenta() {
     }
 
-    public Cuenta(Integer id_cuenta, String estado_cuenta, Integer peso_total_de_envio, Integer numero_parcialidades, String matriculas_autorizadas, String nit_agricultor, Integer numero_pesajes_registrados, Date fecha_creacion, Date fecha_modificacion) {
+    public Cuenta(Integer id_cuenta, String estado_cuenta, Integer peso_total_de_envio, Integer numero_parcialidades, String matriculas_autorizadas, String usuario_agricultor, Integer numero_pesajes_registrados, Date fecha_creacion, Date fecha_modificacion, Integer parcialidades_generadas) {
         this.id_cuenta = id_cuenta;
         this.estado_cuenta = estado_cuenta;
         this.peso_total_de_envio = peso_total_de_envio;
         this.numero_parcialidades = numero_parcialidades;
         this.matriculas_autorizadas = matriculas_autorizadas;
-        this.nit_agricultor = nit_agricultor;
+        this.usuario_agricultor = usuario_agricultor;
         this.numero_pesajes_registrados = numero_pesajes_registrados;
         this.fecha_creacion = fecha_creacion;
         this.fecha_modificacion = fecha_modificacion;
-        
+        this.parcialidades_generadas = parcialidades_generadas;
     }
 
+    
     @Id
     @Column (name="id_cuenta", length=30)
     public Integer getId_cuenta() {
@@ -66,20 +72,26 @@ public class Cuenta {
         return numero_parcialidades;
     }
 
-    @Column (name="matriculas_autorizadas", length=50)
+    @Column (name="matriculas_autorizadas")
     public String getMatriculas_autorizadas() {
         return matriculas_autorizadas;
     }
 
-    @Column (name="nit_agricultor", length=13)
-    public String getNit_agricultor() {
-        return nit_agricultor;
+    @Column (name="usuario_agricultor", length=13)
+    public String getUsuario_agricultor() {
+        return usuario_agricultor;
     }
 
     @Column (name="numero_pesajes_registrados")
     public Integer getNumero_pesajes_registrados() {
         return numero_pesajes_registrados;
     }
+    
+    @Column (name="parcialidades_generadas")
+    public Integer getParcialidades_generadas() {
+        return parcialidades_generadas;
+    }
+    
 
     @Column (name="fecha_creacion")
     public Date getFecha_creacion() {
@@ -111,8 +123,8 @@ public class Cuenta {
         this.matriculas_autorizadas = matriculas_autorizadas;
     }
 
-    public void setNit_agricultor(String nit_agricultor) {
-        this.nit_agricultor = nit_agricultor;
+    public void setUsuario_agricultor(String usuario_agricultor) {
+        this.usuario_agricultor = usuario_agricultor;
     }
 
     public void setNumero_pesajes_registrados(Integer numero_pesajes_registrados) {
@@ -125,6 +137,10 @@ public class Cuenta {
 
     public void setFecha_modificacion(Date fecha_modificacion) {
         this.fecha_modificacion = fecha_modificacion;
+    }
+
+    public void setParcialidades_generadas(Integer parcialidades_generadas) {
+        this.parcialidades_generadas = parcialidades_generadas;
     }
     
     

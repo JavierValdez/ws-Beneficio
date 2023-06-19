@@ -4,11 +4,16 @@ package com.usuarios.usuarios.repositories;
 import com.usuarios.usuarios.models.Transporte;
 import java.util.List;
 import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@Qualifier("")
 public interface TransporteRepositories extends CrudRepository<Transporte,Integer> {
     @Override
     public List<Transporte> findAll();
@@ -18,14 +23,13 @@ public interface TransporteRepositories extends CrudRepository<Transporte,Intege
     @Transactional 
     public String consultaTransporte(@Param("pMatricula") String pMatricula);
     
-    
     //Area de Consultas a BD
-    @Query(value = "select usuario.estado from  usuario where usuario.nit= :pnit limit 1", nativeQuery = true)
+    @Query(value = "select agricultor.estado from  agricultor where agricultor.nit= :pnit limit 1", nativeQuery = true)
     @Transactional 
     public String consultaNit(@Param("pnit") String pnit);
     
     //Area de Consultas a BD
-    @Query(value = "select usuario.estado from  usuario where usuario.contrasena = :pcontrasena limit 1", nativeQuery = true)
+    @Query(value = "select agricultor.estado from  agricultor where agricultor.contrasena = :pcontrasena limit 1", nativeQuery = true)
     @Transactional 
     public String consultaContrasena(@Param("pcontrasena") String pcontrasena);
     
@@ -34,7 +38,9 @@ public interface TransporteRepositories extends CrudRepository<Transporte,Intege
     @Modifying(flushAutomatically = true)
     @Query(value = "update transporte  set estado=1030 where matricula= :pMatricula", nativeQuery = true)
     public int eliminaTransporte(@Param("pMatricula") String pMatricula);
-
-
     
+    
+    @Query(value = "select * from transporte where estado=1020 and usuario_creo=:pa  ", nativeQuery = true)
+    @Transactional 
+    public List<Transporte> consulta( @Param("pa")String a);
 }

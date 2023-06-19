@@ -1,10 +1,9 @@
 
 package com.usuarios.usuarios.controllers;
 
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.Dto.pesajePesoCabalDto;
-import com.usuarios.usuarios.models.Transportista;
-import com.usuarios.usuarios.models.pesajePesoCabal;
-import com.usuarios.usuarios.services.TransportistaServices;
+import com.usuarios.usuarios.modelsPesaje.pesajePesoCabal;
 import com.usuarios.usuarios.services.pesajePesoCabalServices;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class pesajePesoCabalController {
     @Autowired
-    pesajePesoCabalServices pesajePesoCabalServices;
-    
-    @CrossOrigin(origins="http://localhost:4200")
+     pesajePesoCabalServices pesajePesoCabalServices;
+
+    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
     @GetMapping(value="pesajePesoCabal/findAllPesajes")
     public List<pesajePesoCabal> getAllPesajes (){
         return pesajePesoCabalServices.getAllPesajes();
     }
     
     //metodo para crear un usuario
-    @CrossOrigin(origins="http://localhost:4200")
+    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
     @PostMapping(value="pesajePesoCabal/createPesaje")
-    public String createPesaje(@RequestBody pesajePesoCabalDto dto){
+    public mensajeDto createPesaje(@RequestBody pesajePesoCabalDto dto){
         return pesajePesoCabalServices.createPesaje(dto);
     }
 }
