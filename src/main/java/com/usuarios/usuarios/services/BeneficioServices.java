@@ -62,7 +62,7 @@ public class BeneficioServices {
                             mensaje.setMensaje(" El ingreso es permitido");
                             
                             int actualizarEstado = BeneficioRepositories.actualizaE(cuenta, fecha);
-                            
+                            BeneficioRepositories.save(Beneficio);
                             return mensaje;
                         } else {
                             mensaje.setMensaje("El transportista no tiene permitido el ingreso.  ");

@@ -43,7 +43,12 @@ public class TransportistaServices {
     public List<Transportista> getAllTransportista(String a) {
         return this.TransportistaRepositories.consulta(a);  
     }
-    
+
+    @Transactional
+    public List<Transportista> getAllTransportistaLicencia(String a) {
+        return this.TransportistaRepositories.consultaLicencia(a);
+    }
+
     @Transactional
    public mensajeDto InscribirTransportista (TransportistaDto dto) throws Exception{       
         
@@ -57,6 +62,7 @@ public class TransportistaServices {
        Transportista.setUsuario_creo(dto.getUsuario_creo());
        Transportista.setEstado(1020);
        Transportista.setDisponibilidad(true);
+       Transportista.setFoto(dto.getFoto());
        if(dto.getTipo_licencia().equals("A")){
            System.out.println("Mostrando el ingreso del usuario_creo: "+dto.getUsuario_creo() );
          TransportistaRepositories.save(Transportista);

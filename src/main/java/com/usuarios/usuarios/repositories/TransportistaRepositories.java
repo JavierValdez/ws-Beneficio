@@ -46,5 +46,10 @@ public interface TransportistaRepositories extends CrudRepository<Transportista,
     @Query(value = "select * from transportista where estado=1020 and usuario_creo=:pa", nativeQuery = true)
     @Transactional 
     public List<Transportista> consulta( @Param("pa")String a);
-    
+
+    @Query(value = "select * from transportista where estado=1020 and numero_licencia=:licencia", nativeQuery = true)
+    @Transactional
+    public List<Transportista> consultaLicencia( @Param("licencia")String a);
+
+
 }

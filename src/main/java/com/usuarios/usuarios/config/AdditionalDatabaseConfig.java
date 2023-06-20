@@ -23,7 +23,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @EnableJpaRepositories(
         basePackages = {
-                "com.usuarios.usuarios.additional.repositories"
+                // "com.usuarios.usuarios.repositories",
+                // "com.usuarios.usuarios.security.repository",
+                //"com.usuarios.usuarios.additional.repositories"
         },
         entityManagerFactoryRef = "additionalEntityManagerFactory",
         transactionManagerRef = "additionalTransactionManager"

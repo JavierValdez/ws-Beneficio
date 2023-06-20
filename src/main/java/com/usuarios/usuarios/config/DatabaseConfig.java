@@ -25,7 +25,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableJpaRepositories(
         basePackages = {
                 "com.usuarios.usuarios.repositories",
-                "com.usuarios.usuarios.security.repository"
+                "com.usuarios.usuarios.security.repository",
+                "com.usuarios.usuarios.additional.repositories"
         },
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "transactionManager"
@@ -52,7 +53,7 @@ public class DatabaseConfig {
             @Qualifier("mainDataSource") DataSource dataSource) {
         return builder
                 .dataSource(dataSource)
-                .packages("com.usuarios.usuarios.models", "com.usuarios.usuarios.security.models")
+                .packages("com.usuarios.usuarios.models", "com.usuarios.usuarios.security.models","com.usuarios.usuarios.modelsPesaje")
                 .persistenceUnit("main")
                 .build();
     }

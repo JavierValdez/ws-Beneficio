@@ -36,6 +36,11 @@ public class TransportistaController {
     public List<Transportista> getTransporteS (@RequestParam String a) throws Exception{
         return TransportistaServices.getAllTransportista(a);
     }
+    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @GetMapping(value="Transportista/AsignacionLicencia")
+    public List<Transportista> getTransportista (@RequestParam String a) throws Exception{
+        return TransportistaServices.getAllTransportistaLicencia(a);
+    }
     
     //metodo para crear un usuario
     @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
