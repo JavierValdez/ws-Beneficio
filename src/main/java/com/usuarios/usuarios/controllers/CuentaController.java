@@ -28,25 +28,33 @@ public class CuentaController {
     
     @Autowired
     CuentaServices CuentaServices;
-
-
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    
+    @CrossOrigin(origins="*")
     @GetMapping(value="Cuenta/CuentasAlmacenadas")
     public List<Cuenta> getAllAgricultor (){
         return CuentaServices.getAllCuenta();
     }
     
     //metodo para crear un usuario
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @CrossOrigin(origins="*")
     @PostMapping(value="Cuenta/CrearCuenta")
     public mensajeDto crearAgricultor(@RequestBody CuentaDto dto) {
         return CuentaServices.crearCuenta(dto);
     }
-
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    
+    //metodo para crear un usuario
+    @CrossOrigin(origins="*")
+    @PostMapping(value="Cuenta/ActualizarCuenta")
+    public mensajeDto actualizarCuenta(@RequestBody CuentaDto dto) {
+        return CuentaServices.actualizarCuenta(dto);
+    }
+    
+    @CrossOrigin(origins="*")
     @GetMapping(value="Cuenta/ListadoCuentas")
     public List<Cuenta> getTransporteS (@RequestParam String a) throws Exception{
         return CuentaServices.getAllCuentas(a);
     }
+    
+
     
 }

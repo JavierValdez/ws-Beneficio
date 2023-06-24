@@ -7,9 +7,12 @@ package com.usuarios.usuarios.controllers;
 
 import com.usuarios.usuarios.Dto.BeneficioDto;
 import com.usuarios.usuarios.Dto.mensajeDto;
+import com.usuarios.usuarios.models.Beneficio;
 import com.usuarios.usuarios.services.BeneficioServices;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,10 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class BeneficioController {
     @Autowired
     BeneficioServices BeneficioServices;
-
-
-
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    
+    @CrossOrigin(origins="*")
+    @GetMapping(value="Beneficio/findAllRegistros")
+    public List<Beneficio> getAllTransporte (){
+        return BeneficioServices.getAllRegistros();
+    }
+    
+    
+    @CrossOrigin(origins="*")
     @PostMapping(value="Beneficio/RegistrarIngreso")
     public mensajeDto registrarIngreso(@RequestBody BeneficioDto dto){
         return BeneficioServices.registrarIngreso(dto);

@@ -45,7 +45,7 @@ public class TransportistaServices {
     }
 
     @Transactional
-    public List<Transportista> getAllTransportistaLicencia(String a) {
+    public List<Transportista> getTransportistaLicencia(String a) {
         return this.TransportistaRepositories.consultaLicencia(a);
     }
 
@@ -62,7 +62,7 @@ public class TransportistaServices {
        Transportista.setUsuario_creo(dto.getUsuario_creo());
        Transportista.setEstado(1020);
        Transportista.setDisponibilidad(true);
-       Transportista.setFoto(dto.getFoto());
+       Transportista.setFoto(dto.getFoto() );
        if(dto.getTipo_licencia().equals("A")){
            System.out.println("Mostrando el ingreso del usuario_creo: "+dto.getUsuario_creo() );
          TransportistaRepositories.save(Transportista);
@@ -110,14 +110,18 @@ public class TransportistaServices {
    }
    
    //Metodo para eliminar Transporte activo o inactivo.
-    public String eliminarTransportista(TransportistaDto dto) throws Exception {
+    public mensajeDto eliminarTransportista(TransportistaDto dto) throws Exception {
+        mensajeDto mensaje = new mensajeDto();
         Date pfecham = this.fecha;
         String plicencia = dto.getNumero_licencia();  
             int licencia = this.TransportistaRepositories.eliminarTransportista(plicencia, pfecham);
             if (licencia > 0) {
-                return "El transporte con las placas: "+ plicencia + " fue eliminado con exito";
+                mensaje.setMensaje("El Transportista fue Inactivado con exito");
+                return mensaje;
+                
             } else {
-                return "Error al eliminar el transporte con las placas: "+ plicencia;
+                mensaje.setMensaje("Ocurrio un error, Verifique No. de Licencia Ingresada");
+                return mensaje;
             }
     }
     

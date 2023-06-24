@@ -18,10 +18,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class BeneficioDto {
-    private Integer id_ingreso;
-    private Integer id_cuenta;
+    private String id_ingreso;
+    private String id_cuenta;
     private String usuario_agricultor;
     private String matricula_autorizada;
     private String licencia_autorizada;
+    private String usuario_beneficio;
+    private String id_parcialidad;
     //private Date fecha_asignacion;
 }

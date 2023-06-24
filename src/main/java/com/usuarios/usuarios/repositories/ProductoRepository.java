@@ -5,7 +5,6 @@
  */
 package com.usuarios.usuarios.repositories;
 import com.usuarios.usuarios.models.Producto;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +13,7 @@ import java.util.Optional;
  *
  * @author fasp9
  */
-
 @Repository
-@Qualifier("")
 public interface ProductoRepository extends JpaRepository<Producto, Integer>{
     Optional<Producto> findByNombre(String nombre);
     boolean existsByNombre(String nombre);

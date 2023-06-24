@@ -21,35 +21,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransporteController {
     @Autowired
     TransporteServices TransporteServices;
-
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    
+    @CrossOrigin(origins="*")
     @GetMapping(value="Transporte/findAllTransporte")
     public List<Transporte> getAllTransporte (){
         return TransporteServices.getAllTransporte();
     }
-
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    
+    @CrossOrigin(origins="*")
     @GetMapping(value="Transporte/AsignacionTransporte")
     public List<Transporte> getTransporteS (@RequestParam String a) throws Exception{
         return TransporteServices.getAllTransporte(a);
     }
     
     //metodo para crear un usuario
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @CrossOrigin(origins="*")
     @PostMapping(value="Transporte/InscribirTransporte")
     public mensajeDto InscribirTransporte(@RequestBody TransporteDto dto) throws Exception{
         return TransporteServices.InscribirTransporte(dto);
     }
      
     //metodo para Concultar un Transporte por medio de la matricula
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @CrossOrigin(origins="*")
     @GetMapping(value="Transporte/consultaTransporte")
     public mensajeDto consultarTransporte(@RequestBody TransporteDto dto)throws Exception{
         return TransporteServices.consultarTransporte(dto);
     }
     
     //metodo para crear un usuario
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @CrossOrigin(origins="*")
     @PostMapping(value="Transporte/eliminarTransporte")
     public mensajeDto eliminarTransporte(@RequestBody TransporteDto dto)throws Exception{
         return TransporteServices.eliminarTransporte(dto);

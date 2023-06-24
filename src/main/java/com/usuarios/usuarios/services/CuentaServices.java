@@ -22,7 +22,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class CuentaServices {
-    
+    private String completada= "Pesaje Finalizado";
+    private String cerrada = "Cuenta Cerrada";
     @Autowired
     CuentaRepositories CuentaRepositories;
     
@@ -34,7 +35,6 @@ public class CuentaServices {
     public List<Cuenta> getAllCuenta() {
         return CuentaRepositories.findAll();
     }
-    
      
     @Transactional
     public List<Cuenta> getAllCuentas(String a) {
@@ -42,12 +42,47 @@ public class CuentaServices {
     }
     
     @Transactional
+    public mensajeDto actualizarCuenta(CuentaDto dto) {
+        mensajeDto mensaje = new mensajeDto();
+        final Cuenta Cuentas = new Cuenta();
+        String estadoCuenta = CuentaRepositories.obtenerEstado(dto.getId_cuenta());
+        if (estadoCuenta != null) {
+            if (estadoCuenta.equals(completada)) {
+                int estadoCuentaCerrada1 = CuentaRepositories.actualizar1(dto.getId_cuenta());
+                if (estadoCuentaCerrada1 > 0) {
+                    mensaje.setMensaje("Cuenta Actualizada Exitosamente");
+                    return mensaje;
+                } else {
+                    mensaje.setMensaje("Error, no fue Posible Actualizar la Cuenta");
+                    return mensaje;
+                }
+            } else if (estadoCuenta.equals(cerrada)) {
+                int estadoCuentaCerrada2 = CuentaRepositories.actualizar2(dto.getId_cuenta());
+                if (estadoCuentaCerrada2 > 0) {
+                    mensaje.setMensaje("Cuenta Actualizada Exitosamente");
+                    return mensaje;
+                } else {
+                    mensaje.setMensaje("Error, no fue Posible Actualizar la Cuenta");
+                    return mensaje;
+                }
+            } else {
+                mensaje.setMensaje("Error, No permitido Actualizar en el Estado Actual.");
+                return mensaje;
+            }
+        } else {
+            mensaje.setMensaje("No se Obtubo Informacion de la Cuenta ");
+            return mensaje;
+        }
+    }
+    
+    
+    @Transactional
     public mensajeDto crearCuenta(CuentaDto dto) {
         mensajeDto mensaje = new mensajeDto();
         int valor = this.getFiveDigitsNumber();
         java.util.Date fecha = new Date();
         final Cuenta Cuenta = new Cuenta();
-        Cuenta.setId_cuenta(valor);
+        Cuenta.setId_cuenta(dto.getId_cuenta());
         Cuenta.setFecha_creacion(fecha);
         Cuenta.setEstado_cuenta("Cuenta Creada");
         Cuenta.setPeso_total_de_envio(dto.getPeso_total_de_envio());
@@ -57,10 +92,7 @@ public class CuentaServices {
         Cuenta.setNumero_pesajes_registrados(0);
         Cuenta.setParcialidades_generadas(0);
         CuentaRepositories.save(Cuenta);
-        mensaje.setMensaje("Cuenta Creada Exitosamente, su numero de cuenta es: "+ valor);
+        mensaje.setMensaje("Cuenta Creada Exitosamente");
         return  mensaje;
     }
-    
-     
-    
 }

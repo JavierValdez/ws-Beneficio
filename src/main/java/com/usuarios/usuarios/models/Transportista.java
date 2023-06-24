@@ -24,14 +24,13 @@ public class Transportista {
     private String usuario_creo;
     private String usuario_modifico;
     private boolean disponibilidad;
-
     private String foto;
     //private String nit;
 
     public Transportista() {
     }
 
-    public Transportista(String numero_licencia, String nombres, String apellidos, String tipo_licencia, Integer estado, Date fecha_inscripcion, Date fecha_modificacion, String usuario_creo, String usuario_modifico, boolean disponibilidad, String foto/*, String nit*/) {
+    public Transportista(String numero_licencia, String nombres, String apellidos, String tipo_licencia, Integer estado, Date fecha_inscripcion, Date fecha_modificacion, String usuario_creo, String usuario_modifico, boolean disponibilidad, String foto ) {
         this.numero_licencia = numero_licencia;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -42,7 +41,7 @@ public class Transportista {
         this.usuario_creo = usuario_creo;
         this.usuario_modifico = usuario_modifico;
         this.disponibilidad = disponibilidad;
-        this.foto = foto;
+        this.foto=foto;
         //this.nit = nit;
     }
 
@@ -97,7 +96,9 @@ public class Transportista {
         return disponibilidad;
     }
 
-    @Column (name="foto", length=10000000)
+
+
+    @Column (name="foto",length = 10000000)
     public String getFoto() {
         return foto;
     }
@@ -107,9 +108,9 @@ public class Transportista {
     }
 
     /*@Column (name="nit", length=13)
-        public String getNit() {
-            return nit;
-        }*/
+    public String getNit() {
+        return nit;
+    }*/
     public void setNumero_licencia(String numero_licencia) {
         this.numero_licencia = numero_licencia;
     }

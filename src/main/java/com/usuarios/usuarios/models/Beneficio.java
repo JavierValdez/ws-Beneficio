@@ -20,34 +20,37 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Beneficio", schema="public")
 public class Beneficio {
-    private Integer id_ingreso;
-    private Integer id_cuenta;
+    private String id_ingreso;
+    private String id_cuenta;
     private String usuario_agricultor;
     private String matricula_autorizada;
     private String licencia_autorizada;
     private Date fecha_asignacion;
+    private String usuario_beneficio;
+    private boolean pesaje_realizado;
 
     public Beneficio() {
     }
 
-    public Beneficio(Integer id_ingreso, Integer id_cuenta, String usuario_agricultor, String matricula_autorizada, String licencia_autorizada, Date fecha_asignacion) {
+    public Beneficio(String id_ingreso, String id_cuenta, String usuario_agricultor, String matricula_autorizada, String licencia_autorizada, Date fecha_asignacion, String usuario_beneficio, Boolean pesaje_realizado) {
         this.id_ingreso = id_ingreso;
         this.id_cuenta = id_cuenta;
         this.usuario_agricultor = usuario_agricultor;
         this.matricula_autorizada = matricula_autorizada;
         this.licencia_autorizada = licencia_autorizada;
         this.fecha_asignacion = fecha_asignacion;
+        this.usuario_beneficio = usuario_beneficio;
+        this.pesaje_realizado=pesaje_realizado;
     }
 
     @Id
     @Column (name="id_ingreso")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId_ingreso() {
+    public String getId_ingreso() {
         return id_ingreso;
     }
 
-    @Column (name="id_cuenta", length=13)
-    public Integer getId_cuenta() {
+    @Column (name="id_cuenta", length=50)
+    public String getId_cuenta() {
         return id_cuenta;
     }
 
@@ -70,13 +73,22 @@ public class Beneficio {
     public Date getFecha_asignacion() {
         return fecha_asignacion;
     }
+    
+    @Column (name="usuario_beneficio", length=13)
+    public String getUsuario_beneficio() {
+        return usuario_beneficio;
+    }
 
-    public void setId_ingreso(Integer id_ingreso) {
+    @Column (name="pesaje_realizado")
+    public boolean getPesaje_realizado() {
+        return pesaje_realizado;
+    }
+
+    public void setId_ingreso(String id_ingreso) {
         this.id_ingreso = id_ingreso;
     }
 
-    
-    public void setId_cuenta(Integer id_cuenta) {
+    public void setId_cuenta(String id_cuenta) {
         this.id_cuenta = id_cuenta;
     }
 
@@ -94,6 +106,14 @@ public class Beneficio {
 
     public void setFecha_asignacion(Date fecha_asignacion) {
         this.fecha_asignacion = fecha_asignacion;
+    }
+
+    public void setUsuario_beneficio(String usuario_beneficio) {
+        this.usuario_beneficio = usuario_beneficio;
+    }
+
+    public void setPesaje_realizado(boolean pesaje_realizado) {
+        this.pesaje_realizado = pesaje_realizado;
     }
       
 }

@@ -17,42 +17,48 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransportistaController {
     @Autowired
     TransportistaServices TransportistaServices;
-
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    
+    @CrossOrigin(origins="*")
     @GetMapping(value="Transportista/EncuentraTransportista")
     public List<Transportista> getAllTransportista (){
         return TransportistaServices.getAllTransportista();
     }
     
     //metodo para crear un usuario
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @CrossOrigin(origins="*")
     @PostMapping(value="Transportista/InscribirTransportista")
     public mensajeDto InscribirTransportista(@RequestBody TransportistaDto dto) throws Exception {
         return TransportistaServices.InscribirTransportista(dto);
     }
-
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    
+    @CrossOrigin(origins="*")
     @GetMapping(value="Transportista/AsignacionTransportistas")
     public List<Transportista> getTransporteS (@RequestParam String a) throws Exception{
         return TransportistaServices.getAllTransportista(a);
     }
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+
+    @CrossOrigin(origins="*")
     @GetMapping(value="Transportista/AsignacionLicencia")
-    public List<Transportista> getTransportista (@RequestParam String a) throws Exception{
-        return TransportistaServices.getAllTransportistaLicencia(a);
+    public List<Transportista> getTrasportista(@RequestParam String a) throws Exception{
+        return TransportistaServices.getTransportistaLicencia(a);
     }
     
     //metodo para crear un usuario
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @CrossOrigin(origins="*")
     @GetMapping(value="Transportista/consultaTransportista")
     public String consultaTransportista(@RequestBody TransportistaDto dto)throws Exception{
         return TransportistaServices.consultaTransportista(dto);
     }
+
+
+
+    //metodo para consultar solo un transportista
+
     
     //metodo para crear un usuario
-    @CrossOrigin(origins={"http://localhost:4200", "https://cafetalito-3af53.web.app"})
+    @CrossOrigin(origins="*")
     @PostMapping(value="Transportista/eliminarTransportista")
-    public String eliminarTransportista(@RequestBody TransportistaDto dto)throws Exception{
+    public mensajeDto eliminarTransportista(@RequestBody TransportistaDto dto)throws Exception{
         return TransportistaServices.eliminarTransportista(dto);
     }
     
