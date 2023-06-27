@@ -98,7 +98,7 @@ public class Transportista {
 
 
 
-    @Column (name="foto",length = 10000000)
+    @Column (name="foto",length = 10485760)
     public String getFoto() {
         return foto;
     }
