@@ -1,6 +1,7 @@
 
 package com.usuarios.usuarios.controllers;
 
+import com.usuarios.usuarios.Dto.Sumatoria;
 import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.Dto.pesajePesoCabalDto;
 import com.usuarios.usuarios.models.Transportista;
@@ -41,9 +42,15 @@ public class pesajePesoCabalController {
     }
 
     //metodo para crear un usuario
-    @CrossOrigin(origins="*")
+   /* @CrossOrigin(origins="*")
     @PostMapping(value="pesajePesoCabal/consultaSumatoria")
     public Integer consultaSumatoria(@RequestBody pesajePesoCabalDto dto){
+        return pesajePesoCabalServices.consultaSumatoria(dto);
+    }*/
+    
+      @CrossOrigin(origins="*")
+    @PostMapping(value="pesajePesoCabal/consultaSumatoria")
+    public Sumatoria consultaSumatoria(@RequestBody pesajePesoCabalDto dto){
         return pesajePesoCabalServices.consultaSumatoria(dto);
     }
 

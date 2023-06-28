@@ -2,6 +2,7 @@
 package com.usuarios.usuarios.services;
 
 import com.usuarios.usuarios.Dto.CuentaDto;
+import com.usuarios.usuarios.Dto.Sumatoria;
 import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.Dto.pesajePesoCabalDto;
 import com.usuarios.usuarios.models.Cuenta;
@@ -46,15 +47,17 @@ public class pesajePesoCabalServices {
         return pesajePesoCabalRepositories.findAll();
     }
     
-    @Transactional
-    public Integer consultaSumatoria(pesajePesoCabalDto dto) {
-        final pesajePesoCabal pesajePesoCabal = new pesajePesoCabal();
-        Integer respuesta = pesajePesoCabalRepositories.consultaSumatoria(dto.getId_cuenta());
-        if(respuesta!=null){
-            return respuesta;
-        }else{
-            return 0;
+   @Transactional
+    public Sumatoria consultaSumatoria(pesajePesoCabalDto dto) {
+        final Sumatoria sum = new Sumatoria();
+        String respuesta = pesajePesoCabalRepositories.consultaSumatoria(dto.getId_cuenta());
+        if(respuesta!=null || respuesta !=""){
+            String[] parts = respuesta.split(",");
+            sum.setPeso_total_de_envio(Integer.valueOf(parts[0]));
+            sum.setSumatoriaPeso(Integer.valueOf(parts[1]));
+            System.out.println("Mostrando Respuesta: "+respuesta);
         }
+        return sum;
     }
 
     //COnsulta consultarEstado

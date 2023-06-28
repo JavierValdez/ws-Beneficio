@@ -21,9 +21,18 @@ public interface pesajePesoCabalRepositories extends CrudRepository<pesajePesoCa
     @Query(value = "select id_cuenta,estado_cuenta,usuario_agricultor,numero_pesajes_registrados,numero_parcialidades,peso_total_de_envio  from cuenta where id_cuenta= :pid_cuenta", nativeQuery = true)
     public String consultarCuenta(@Param("pid_cuenta") String pid_cuenta);
     
-    @Transactional
+    /*@Transactional
     @Query(value = "select sum(peso_cargamento)from pesaje_peso_cabal where id_cuenta=:pid", nativeQuery = true)
-    public Integer consultaSumatoria(@Param("pid") String id);
+    public Integer consultaSumatoria(@Param("pid") String id);*/
+    
+     @Transactional
+    @Query(value = "SELECT cuenta.peso_total_de_envio, SUM(pesaje_peso_cabal.peso_cargamento) AS sumatoria_peso\n" +
+    "FROM cuenta\n" +
+    "JOIN pesaje_peso_cabal ON cuenta.id_cuenta = pesaje_peso_cabal.id_cuenta\n" +
+    "WHERE cuenta.id_cuenta =:pid_cuenta\n" +
+    "GROUP BY cuenta.peso_total_de_envio;", nativeQuery = true)
+    public String consultaSumatoria(@Param("pid_cuenta") String pid_cuenta);
+    
     
     @Transactional
     @Query(value = "select matriculas_autorizadas from cuenta where id_cuenta=:pid_cuenta", nativeQuery = true)
